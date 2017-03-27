@@ -3,7 +3,7 @@ package com.robertomanca.flights
 /**
  * @author ${user.name}
  */
-object App {
+object MyApp {
   
   def foo(x : Array[String]) = x.foldRight("")((a,b) => a + b)
 
