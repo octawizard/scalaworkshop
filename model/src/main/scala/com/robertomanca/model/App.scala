@@ -1,7 +1,10 @@
 package com.robertomanca.model
 
+import java.util.{Currency, Date}
+
 import com.robertomanca.model.user.{AppUser, CorporateUser, User}
 import com.robertomanca.model.location.Location
+import com.robertomanca.model.flight._
 
 /**
   * @author ${user.name}
@@ -74,7 +77,11 @@ object App {
 
     println("... otherwise print an empty list if the user doesn't exist")
     optUser = users.lift(5)
-    println(optUser.map(_.favouriteLocations).getOrElse(List.empty).filter(_.country.equals("italy")).distinct)  //note no null check done to do all of this
+    println(optUser.map(_.favouriteLocations).getOrElse(List.empty).filter(_.country.equals("italy")).distinct)  //note no null check done to do all of thisç
+
+    val flight = new Flight(1, new FlightSegment("alitalia", "alitalia.jpg", barcelona, rome, new Date(), new Date()),
+      new FlightSegment("vueling", "alitalia.jpg", rome, barcelona, new Date(), new Date()), 123.23, Currency.getInstance("EUR"));
+    println(flight)
   }
 
 }
