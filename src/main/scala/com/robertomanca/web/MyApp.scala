@@ -1,4 +1,4 @@
-package com.robertomanca.flights
+package com.robertomanca.web
 
 /**
  * @author ${user.name}

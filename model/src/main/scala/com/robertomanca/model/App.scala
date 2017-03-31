@@ -68,7 +68,7 @@ object App {
 
     println("Use lift to get an optional of an element in the users list and if it exists, print his Italian fav locations...")
     var optUser = users.lift(0)
-    println(optUser.map(_.favouriteLocations).getOrElse(List.empty).filter(_.country.equals("italy")).distinct) //.filter(_.country.equals("italy")).distinct
+    println(optUser.map(_.favouriteLocations).getOrElse(List.empty).filter(_.country.equals("italy")).distinct)
 
     println
 
