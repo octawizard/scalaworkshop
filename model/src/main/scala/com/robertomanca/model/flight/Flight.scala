@@ -1,8 +1,14 @@
 package com.robertomanca.model.flight
 
+import java.util.{Currency, Date}
+
+import com.robertomanca.model.location.Location
+
 /**
   * Created by Roberto Manca (roberto.manca@edreamsodigeo.com) on 24/03/2017.
   */
-class Flight {
+class Flight(val id: Long, var inbound: FlightSegment, var outbound: FlightSegment, val price: Double, val currency: Currency) {
 
 }
+
+class FlightSegment(var airline: String, var airlineImage: String, var origin: Location, var destination: Location, var departure: Date, var arrival: Date)
