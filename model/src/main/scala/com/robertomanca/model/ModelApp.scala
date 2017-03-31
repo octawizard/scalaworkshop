@@ -9,7 +9,7 @@ import com.robertomanca.model.flight._
 /**
   * @author ${user.name}
   */
-object App {
+object ModelApp {
 
   def foo(x: Array[String]) = x.foldRight("")((a, b) => a + b)
 
@@ -82,6 +82,12 @@ object App {
     val flight = new Flight(1, new FlightSegment("alitalia", "alitalia.jpg", barcelona, rome, new Date(), new Date()),
       new FlightSegment("vueling", "alitalia.jpg", rome, barcelona, new Date(), new Date()), 123.23, Currency.getInstance("EUR"));
     println(flight)
+
+    val oneWayFlight = new Flight(2, new FlightSegment("iberia", "iberia.jpg", barcelona, madrid, new Date(), new Date()),
+      null, 80.14, Currency.getInstance("EUR"))
+    println(oneWayFlight)
+
+    println(rome.equals(new Location("rome", "italy")))
   }
 
 }

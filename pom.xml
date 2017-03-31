@@ -28,6 +28,7 @@
         <module>model</module>
         <module>web</module>
         <module>service</module>
+        <module>repository</module>
     </modules>
 
     <dependencies>
@@ -107,7 +108,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.robertomanca.model.App</mainClass>
+                            <mainClass>com.robertomanca.model.ModelApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
