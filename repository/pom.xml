@@ -31,16 +31,4 @@
             <url>http://scala-tools.org/repo-releases</url>
         </pluginRepository>
     </pluginRepositories>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-                <configuration>
-                    <scalaVersion>${scala.version}</scalaVersion>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
 </project>

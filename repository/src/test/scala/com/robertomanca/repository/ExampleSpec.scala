@@ -20,7 +20,7 @@ class ExampleSpec extends FlatSpec with Matchers {
   it should "throw NoSuchElementException if an empty stack is popped" in {
     val emptyList = List.empty
     a [NoSuchElementException] should be thrownBy {
-      emptyList.take(0)
+      emptyList.lift(0).getOrElse(throw new NoSuchElementException)
     }
   }
 }
