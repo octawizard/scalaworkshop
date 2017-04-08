@@ -59,13 +59,13 @@
         </dependency>
     </dependencies>
 
-    <pluginRepositories>
-        <pluginRepository>
+    <repositories>
+        <repository>
             <id>artima</id>
             <name>Artima Maven Repository</name>
             <url>http://repo.artima.com/releases</url>
-        </pluginRepository>
-    </pluginRepositories>
+        </repository>
+    </repositories>
 
     <build>
         <sourceDirectory>src/main/scala</sourceDirectory>
