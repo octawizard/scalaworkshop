@@ -14,7 +14,7 @@ class UserService(userRepository: UserRepository) {
 
   def getUser(userId: Long): User = userRepository.get(userId).getOrElse(null)
 
-  def deleteUser(userId: Long) = userRepository.delete(userId)
+  def deleteUser(userId: Long) = userRepository.delete(userId).orElse(throw new UserNotFoundException("user " + userId + " doesn't exist"))
 
   def updateUser(userId: Long, user: User): User =
     userRepository.update(getUser(userId), user).getOrElse(throw new UserNotFoundException("user " + userId + " doesn't exist"))

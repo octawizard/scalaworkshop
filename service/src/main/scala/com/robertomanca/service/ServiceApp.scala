@@ -7,6 +7,8 @@ import com.robertomanca.model.location.Location
 import com.robertomanca.model.user.{AppUser, CorporateUser, User}
 import com.robertomanca.repository.FlightRepository
 
+import scala.collection.mutable.ListBuffer
+
 /**
   * @author ${user.name}
   */
@@ -18,8 +20,8 @@ object ServiceApp {
     val madrid = new Location("madrid", "spain")
     val rome = new Location("rome", "italy")
 
-    val user = CorporateUser(1, "email@edreamsodigeo.com", "Alfredo", "Bianchi", "password", 1, List(barcelona, rome))
-    val appUser = AppUser(2, "test@odigeo.com", "Mario", "Verdi", "test123", List(rome, madrid, barcelona))
+    val user = CorporateUser(1, "email@edreamsodigeo.com", "Alfredo", "Bianchi", "password", 1, List(barcelona, rome).to[ListBuffer])
+    val appUser = AppUser(2, "test@odigeo.com", "Mario", "Verdi", "test123", List(rome, madrid, barcelona).to[ListBuffer])
 
     println
 

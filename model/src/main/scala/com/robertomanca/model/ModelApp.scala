@@ -6,6 +6,8 @@ import com.robertomanca.model.user.{AppUser, CorporateUser, User}
 import com.robertomanca.model.location.Location
 import com.robertomanca.model.flight._
 
+import scala.collection.mutable.ListBuffer
+
 /**
   * @author ${user.name}
   */
@@ -35,13 +37,13 @@ object ModelApp {
     val madrid = new Location("madrid", "spain")
     val rome = new Location("rome", "italy")
 
-    val user = CorporateUser(1, "email@edreamsodigeo.com", "Alfredo", "Bianchi", "password", 1, List(barcelona, rome))
+    val user = CorporateUser(1, "email@edreamsodigeo.com", "Alfredo", "Bianchi", "password", 1, List(barcelona, rome).to[ListBuffer])
     println(user.name + " " + user.surname)
     println("General to string defined in the trait: " + user.printUser)
     print("And then personalized toString depending on the case class: ")
     printPersonalizedWelcomeMessage(user)
 
-    val appUser = AppUser(2, "test@odigeo.com", "Mario", "Verdi", "test123", List(rome, madrid, barcelona))
+    val appUser = AppUser(2, "test@odigeo.com", "Mario", "Verdi", "test123", List(rome, madrid, barcelona).to[ListBuffer])
     println(appUser.name + " " + appUser.surname)
     println("General to string defined in the trait:" + appUser.printUser)
     print("And then personalized toString depending on the case class: ")
@@ -80,7 +82,7 @@ object ModelApp {
     println(optUser.map(_.favouriteLocations).getOrElse(List.empty).filter(_.country.equals("italy")).distinct)  //note no null check done to do all of thisç
 
     val flight = new Flight(1, new FlightSegment("alitalia", "alitalia.jpg", barcelona, rome, new Date(), new Date()),
-      new FlightSegment("vueling", "alitalia.jpg", rome, barcelona, new Date(), new Date()), 123.23, Currency.getInstance("EUR"));
+      new FlightSegment("vueling", "alitalia.jpg", rome, barcelona, new Date(), new Date()), 123.23, Currency.getInstance("EUR"))
     println(flight)
 
     val oneWayFlight = new Flight(2, new FlightSegment("iberia", "iberia.jpg", barcelona, madrid, new Date(), new Date()),
