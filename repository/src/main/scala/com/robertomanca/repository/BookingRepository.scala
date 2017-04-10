@@ -10,18 +10,18 @@ import scala.collection.mutable.ListBuffer
   */
 class BookingRepository(val bookings: ListBuffer[Booking]) {
 
-  def update(maybeBooking: Option[Booking], newBooking: Booking) =  //TODO check
+  def update(maybeBooking: Option[Booking], newBooking: Booking) = //TODO check
     maybeBooking.flatMap(b => {
       b.flights = newBooking.flights
       b.user = newBooking.user
       Option.apply(b)
-    })
+    }).orElse(Option.empty)
 
   def changeOwner(maybeBooking: Option[Booking], user: User): Option[Booking] = //TODO check
     maybeBooking.flatMap(b => {
       b.user = user
       Option.apply(b)
-    })
+    }).orElse(Option.empty)
 
   def delete(bookingId: Long) = bookings.filterNot(_.id == bookingId)
 

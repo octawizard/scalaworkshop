@@ -5,16 +5,18 @@ import java.util.{Calendar, Date}
 import com.robertomanca.model.flight.Flight
 import com.robertomanca.model.location.Location
 
+import scala.collection.mutable.ListBuffer
+
 /**
   * Created by Roberto Manca (roberto.manca@edreamsodigeo.com) on 31/03/2017.
   */
-class FlightRepository(val flights: List[Flight]) {
+class FlightRepository(val flights: ListBuffer[Flight]) {
 
-  def getRoundTripFlights(origin: Location, destination: Location, departure: Date, arrival: Date): Option[List[Flight]] =
-    Option.apply(flights.filter(filterRoundTrip(_, origin, destination, departure, arrival)))
+  def getRoundTripFlights(origin: Location, destination: Location, departure: Date, arrival: Date): List[Flight] =
+    flights.filter(filterRoundTrip(_, origin, destination, departure, arrival)).toList
 
-  def getOneWayFlights(origin: Location, destination: Location, departure: Date): Option[List[Flight]] =
-    Option.apply(flights.filter(filterOneWay(_, origin, destination, departure)))
+  def getOneWayFlights(origin: Location, destination: Location, departure: Date): List[Flight] =
+    flights.filter(filterOneWay(_, origin, destination, departure)).toList
 
   private def filterOneWay(flight: Flight, origin: Location, destination: Location, departure: Date): Boolean =
     flight.outbound.origin.equals(origin) && flight.outbound.destination.equals(destination) &&

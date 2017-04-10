@@ -12,10 +12,10 @@ import com.robertomanca.repository.FlightRepository
 class FlightService(flightRepository: FlightRepository) extends FlightServiceTrait { //If a field doesn’t have a var or val modifier, Scala gets conservative, and doesn’t generate a getter or setter method for the field.
 
   def search(origin: Location, destination: Location, departure: Date): List[Flight] =
-    return flightRepository.getOneWayFlights(origin, destination, departure).getOrElse(List.empty)
+    return flightRepository.getOneWayFlights(origin, destination, departure)
 
   def search(origin: Location, destination: Location, departure: Date, arrival: Date): List[Flight] =
-    flightRepository.getRoundTripFlights(origin, destination, departure, arrival).getOrElse(List.empty)
+    flightRepository.getRoundTripFlights(origin, destination, departure, arrival)
 }
 
 trait FlightServiceTrait {

@@ -54,7 +54,7 @@ object ServiceApp {
       null, 80.14, Currency.getInstance("EUR"))
     println(oneWayFlight)
 
-    val flightRepository = new FlightRepository(List(flight, oneWayFlight))
+    val flightRepository = new FlightRepository(new ListBuffer[Flight] += flight += oneWayFlight)
     val flightService = new FlightService(flightRepository)
 
     println(rome.equals(new Location("rome", "italy")))
