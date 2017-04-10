@@ -1,7 +1,8 @@
 package com.robertomanca.repository
 
-import collection.mutable.{ListBuffer, Stack}
 import org.scalatest._
+
+import scala.collection.mutable.ListBuffer
 
 /**
   * Created by Roberto Manca (roberto.manca@edreamsodigeo.com) on 07/04/2017.
