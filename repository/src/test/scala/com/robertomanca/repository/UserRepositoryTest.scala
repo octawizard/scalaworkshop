@@ -2,6 +2,7 @@ package com.robertomanca.repository
 
 import com.robertomanca.model.location.Location
 import com.robertomanca.model.user.{AppUser, CorporateUser, User}
+import com.robertomanca.repository.data.UsersTrait
 import org.scalatest._
 
 import scala.collection.mutable.ListBuffer
@@ -126,15 +127,7 @@ class UserRepositoryTest extends FlatSpec with Matchers with BeforeAndAfter with
   }
 }
 
-trait UserRepositoryWithUsers {
-
-  val barcelona = new Location("barcelona", "spain")
-  val madrid = new Location("madrid", "spain")
-  val rome = new Location("rome", "italy")
-
-  val aUser1 = AppUser(1, "mario@gmail.com", "Mario", "Rossi", "test123", List(barcelona, rome).to[ListBuffer])
-  val aUser2 = AppUser(1, "alfredo@gmail.com", "Alfredo", "Bovi", "psw91", List(madrid, rome).to[ListBuffer])
-  val cUser2 = CorporateUser(2, "victor@gmail.com", "Victor", "Valdes", "password123", 1234, List(barcelona, madrid).to[ListBuffer])
+trait UserRepositoryWithUsers extends UsersTrait {
 
   val usersList = new ListBuffer[User]
 

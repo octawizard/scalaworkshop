@@ -4,6 +4,7 @@ import java.util.{Currency, Date}
 
 import com.robertomanca.model.flight.{Flight, FlightSegment}
 import com.robertomanca.model.location.Location
+import com.robertomanca.repository.data.FlightsTrait
 import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
 
 import scala.collection.mutable.ListBuffer
@@ -53,17 +54,7 @@ class FlightRepositoryTest extends FlatSpec with Matchers with BeforeAndAfter wi
 
 }
 
-trait FlightRepositoryWithFlights {
-
-  val barcelona = new Location("barcelona", "spain")
-  val madrid = new Location("madrid", "spain")
-  val rome = new Location("rome", "italy")
-
-  val rtFlight = new Flight(1, new FlightSegment("alitalia", "alitalia.jpg", barcelona, rome, new Date(), new Date()),
-    new FlightSegment("vueling", "alitalia.jpg", rome, barcelona, new Date(), new Date()), 123.23, Currency.getInstance("EUR"))
-
-  val oneWayFlight = new Flight(2, new FlightSegment("iberia", "iberia.jpg", barcelona, madrid, new Date(), new Date()),
-    null, 80.14, Currency.getInstance("EUR"))
+trait FlightRepositoryWithFlights extends FlightsTrait {
 
   val flightList = new ListBuffer[Flight]
 
