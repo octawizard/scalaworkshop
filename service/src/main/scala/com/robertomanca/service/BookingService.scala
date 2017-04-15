@@ -12,7 +12,7 @@ class BookingService(bookingRepository: BookingRepository) extends BookingServic
 
   val booking_not_found = "booking id = %d not found"
 
-  def getBookingsByUser(userId: Long): List[Booking] = bookingRepository.getByUser(userId).getOrElse(List.empty) // notice no need of return or brackets
+  def getBookingsByUser(userId: Long): List[Booking] = bookingRepository.getByUser(userId) // notice no need of return or brackets
 
   def getBookingById(bookingId: Long): Booking = bookingRepository.get(bookingId)
     .getOrElse(throw new BookingNotFoundException(booking_not_found format bookingId))
@@ -22,11 +22,11 @@ class BookingService(bookingRepository: BookingRepository) extends BookingServic
   def deleteBooking(bookingId: Long) = bookingRepository.delete(bookingId)
 
   def changeBookingOwner(bookingId: Long, user: User): Booking =
-    bookingRepository.changeOwner(bookingRepository.get(bookingId), user)
+    bookingRepository.changeOwner(bookingId, user)
       .getOrElse(throw new BookingNotFoundException(booking_not_found.format(bookingId)))
 
   def updateBooking(bookingId: Long, booking: Booking): Booking =
-    bookingRepository.update(bookingRepository.get(bookingId), booking)
+    bookingRepository.update(bookingId, booking)
       .getOrElse(throw new BookingNotFoundException(booking_not_found format bookingId))
 
 }
