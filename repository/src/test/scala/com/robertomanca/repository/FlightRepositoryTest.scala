@@ -1,9 +1,8 @@
 package com.robertomanca.repository
 
-import java.util.{Currency, Date}
+import java.util.Date
 
-import com.robertomanca.model.flight.{Flight, FlightSegment}
-import com.robertomanca.model.location.Location
+import com.robertomanca.model.flight.Flight
 import com.robertomanca.repository.data.FlightsTrait
 import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
 

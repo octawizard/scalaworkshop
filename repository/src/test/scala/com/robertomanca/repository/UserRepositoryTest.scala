@@ -1,6 +1,5 @@
 package com.robertomanca.repository
 
-import com.robertomanca.model.location.Location
 import com.robertomanca.model.user.{AppUser, CorporateUser, User}
 import com.robertomanca.repository.data.UsersTrait
 import org.scalatest._
