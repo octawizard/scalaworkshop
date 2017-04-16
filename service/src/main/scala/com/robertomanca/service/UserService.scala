@@ -12,9 +12,9 @@ class UserService(userRepository: UserRepository) {
 
   def createUser(user: User): User = userRepository.create(user)  // no need of return statement
 
-  def getUser(userId: Long): User = userRepository.get(userId).getOrElse(null)
+  def getUser(userId: Long): User = userRepository.get(userId) getOrElse (throw new UserNotFoundException("user " + userId + " doesn't exist"))
 
-  def deleteUser(userId: Long) = userRepository.delete(userId).orElse(throw new UserNotFoundException("user " + userId + " doesn't exist"))
+  def deleteUser(userId: Long): User = userRepository.delete(userId).getOrElse(throw new UserNotFoundException("user " + userId + " doesn't exist"))
 
   def updateUser(userId: Long, user: User): User =
     userRepository.update(getUser(userId), user).getOrElse(throw new UserNotFoundException("user " + userId + " doesn't exist"))
@@ -27,9 +27,9 @@ class UserService(userRepository: UserRepository) {
 
   def getCorporateUsers: List[CorporateUser] = userRepository.getCorporateUsers.map(_.asInstanceOf[CorporateUser])
 
-  def getCorporateUsersByCompany(companyId: Long): List[CorporateUser] = userRepository.getCorporateUsers(companyId)
+  def getCorporateUsersByCompany(companyId: Long): List[CorporateUser] = userRepository getCorporateUsers(companyId)
 
-  def getAppUsers: List[User] = userRepository.getAppUsers.map(_.asInstanceOf[AppUser])
+  def getAppUsers: List[User] = userRepository getAppUsers
 
 }
 
