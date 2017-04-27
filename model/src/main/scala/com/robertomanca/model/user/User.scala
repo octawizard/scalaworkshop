@@ -16,7 +16,7 @@ abstract class User extends PrintableUser {
 case class AppUser(var id: Long, var email: String, var name: String, var surname: String, var password: String, var favouriteLocations: ListBuffer[Location]) extends User {
 
   override def toString =
-    "User(id=" + id + ", email=" + email + ", name=" + name + ", surname=" + surname +")"
+    "User(id=" + id + ", email=" + email + ", name=" + name + ", surname=" + surname + ")"
 
   override def updateUser(newUser: User): User = {
     email = newUser.email
@@ -32,7 +32,7 @@ case class AppUser(var id: Long, var email: String, var name: String, var surnam
 case class CorporateUser(var id: Long, var email: String, var name: String, var surname: String, var password: String, var companyId: Long, var favouriteLocations: ListBuffer[Location]) extends User {
 
   override def toString =
-    "User(id=" + id + ", email=" + email + ", name=" + name + ", surname=" + surname +", companyId=" + companyId + ")"
+    "User(id=" + id + ", email=" + email + ", name=" + name + ", surname=" + surname + ", companyId=" + companyId + ")"
 
   override def updateUser(newUser: User): User = {
     val newCorporateUser = newUser.asInstanceOf[CorporateUser]
