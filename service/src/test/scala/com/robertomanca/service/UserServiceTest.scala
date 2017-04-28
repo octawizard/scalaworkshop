@@ -1,7 +1,7 @@
 package com.robertomanca.service
 
 import com.robertomanca.model.data.UsersTrait
-import com.robertomanca.model.user.User
+import com.robertomanca.model.user.{CorporateUser, User}
 import com.robertomanca.repository.UserRepository
 import com.robertomanca.service.exception.UserNotFoundException
 import org.scalamock.scalatest.MockFactory
@@ -38,5 +38,12 @@ class UserServiceTest extends FlatSpec with Matchers with MockFactory with Users
     (userRepository.getAppUsers _) when() returns(List[User](aUser1, aUser2))
 
     userService.getAppUsers should be(List[User](aUser1, aUser2))
+  }
+
+  it should "return a list of corporate users" in {
+
+    (userRepository.getAppUsers _) when() returns(List[CorporateUser](cUser2))
+
+    userService.getAppUsers should be(List[CorporateUser](cUser2))
   }
 }
