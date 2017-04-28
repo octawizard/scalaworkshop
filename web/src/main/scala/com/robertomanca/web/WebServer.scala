@@ -8,19 +8,13 @@ import akka.stream.ActorMaterializer
 import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
-import com.robertomanca.model.user.User
-import com.robertomanca.repository.UserRepository
-import com.robertomanca.service.UserService
 
-import scala.collection.mutable.ListBuffer
 import scala.io.StdIn
 
 /**
   * Created by Roberto Manca (roberto.manca@edreamsodigeo.com) on 21/04/2017.
   */
 object WebServer {
-
-  val userService = new UserService(new UserRepository(new ListBuffer[User]))
 
   def main(args: Array[String]) {
 
