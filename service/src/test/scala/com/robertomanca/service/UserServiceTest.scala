@@ -1,12 +1,10 @@
 package com.robertomanca.service
 
+import com.robertomanca.model.data.UsersTrait
 import com.robertomanca.repository.UserRepository
-import com.robertomanca.service.data.UsersTrait
 import com.robertomanca.service.exception.UserNotFoundException
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
-
-
+import org.scalatest.{FlatSpec, Matchers}
 
 /**
   * Created by roberto.manca@edreamsodigeo.com on 16/04/2017.

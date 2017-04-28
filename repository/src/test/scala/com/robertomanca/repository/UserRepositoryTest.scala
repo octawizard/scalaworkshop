@@ -1,7 +1,7 @@
 package com.robertomanca.repository
 
+import com.robertomanca.model.data.UsersTrait
 import com.robertomanca.model.user.{AppUser, CorporateUser, User}
-import com.robertomanca.repository.data.UsersTrait
 import org.scalatest._
 
 import scala.collection.mutable.ListBuffer

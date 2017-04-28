@@ -1,4 +1,4 @@
-package com.robertomanca.service.data
+package com.robertomanca.model.data
 
 import com.robertomanca.model.user.{AppUser, CorporateUser}
 

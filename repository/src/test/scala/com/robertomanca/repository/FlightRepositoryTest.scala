@@ -2,8 +2,8 @@ package com.robertomanca.repository
 
 import java.util.Date
 
+import com.robertomanca.model.data.FlightsTrait
 import com.robertomanca.model.flight.Flight
-import com.robertomanca.repository.data.FlightsTrait
 import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
 
 import scala.collection.mutable.ListBuffer

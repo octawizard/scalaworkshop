@@ -1,7 +1,7 @@
 package com.robertomanca.repository
 
 import com.robertomanca.model.booking.Booking
-import com.robertomanca.repository.data.BookingsTrait
+import com.robertomanca.model.data.BookingsTrait
 import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
 
 import scala.collection.mutable.ListBuffer

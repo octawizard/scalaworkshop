@@ -1,4 +1,4 @@
-package com.robertomanca.repository.data
+package com.robertomanca.model.data
 
 import com.robertomanca.model.location.Location
 
