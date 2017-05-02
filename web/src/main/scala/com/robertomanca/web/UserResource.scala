@@ -1,11 +1,11 @@
 package com.robertomanca.web
 
-import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpResponse, StatusCodes}
-import akka.http.scaladsl.server.Directives.{complete, extractUri, handleExceptions, path, pathPrefix}
+import akka.http.scaladsl.model._
+import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.ExceptionHandler
 import akka.http.scaladsl.server.PathMatchers.IntNumber
 import com.robertomanca.model.data.UsersTrait
-import com.robertomanca.model.user.User
+import com.robertomanca.model.user.{AppUser, CorporateUser, User}
 import com.robertomanca.repository.UserRepository
 import com.robertomanca.service.UserService
 import com.robertomanca.service.exception.UserNotFoundException
@@ -27,15 +27,56 @@ object UserResource extends UsersTrait {
       }
   }
 
-  val userRoute =
-    pathPrefix("user") {
-      path(IntNumber) {
-        userId =>
-          handleExceptions(userNotFoundHandler) {
-            complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getUser(userId))))
-          }
+  val userRoute = concat(
+    pathPrefix("users") {
+      path("locations") {
+        get {
+          complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.favouriteLocations)))
+        }
       }
-    }
+    },
+    pathPrefix("user") {
+      concat(
+        path(IntNumber) {
+          userId =>
+            handleExceptions(userNotFoundHandler) {
+              concat(
+                get {
+                  complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getUser(userId))))
+                },
+                delete {
+                  complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.deleteUser(userId))))
+                },
+                put {
+                  entity(as[String]) { userString: String =>
+                    if (userString.contains("companyId")) { // ugly
+                      complete(HttpEntity(ContentTypes.`application/json`,
+                        JsonUtil.toJson(userService.updateUser(userId, JsonUtil.fromJson[CorporateUser](userString)))))
+                    } else {
+                      complete(HttpEntity(ContentTypes.`application/json`,
+                        JsonUtil.toJson(userService.updateUser(userId, JsonUtil.fromJson[AppUser](userString)))))
+                    }
+                  }
+                })
+            }
+        },
+        post {
+          entity(as[String]) { userString: String =>
+            if (userString.contains("companyId")) { // ugly
+              complete(HttpEntity(ContentTypes.`application/json`,
+                JsonUtil.toJson(userService.createUser(JsonUtil.fromJson[CorporateUser](userString)))))
+            } else {
+              complete(HttpEntity(ContentTypes.`application/json`,
+                JsonUtil.toJson(userService.createUser(JsonUtil.fromJson[AppUser](userString)))))
+            }
+          }
+        })
+    })
 
   def createRoute = userRoute
+
+  def asConcreteType(u: User): Any = u match {
+    case AppUser(_, _, _, _, _, _) => u.asInstanceOf[AppUser]
+    case CorporateUser(_, _, _, _, _, _, _) => u.asInstanceOf[CorporateUser]
+  }
 }
