@@ -98,7 +98,7 @@ class UserRepositoryTest extends FlatSpec with Matchers with BeforeAndAfter with
     val newDummy = CorporateUser(99, "piero@gmail.com", "Piero", "Valdes", "password123", 1, List(barcelona, madrid).to[ListBuffer])
     usersList.append(dummy)
 
-    val updatedUser = userRepository.update(dummy, newDummy)
+    val updatedUser = userRepository.update(dummy.id, newDummy)
 
     updatedUser.isDefined should be(true)
     updatedUser.get should equal(newDummy)
@@ -109,7 +109,7 @@ class UserRepositoryTest extends FlatSpec with Matchers with BeforeAndAfter with
     val dummy = CorporateUser(99, "victor@gmail.com", "Victor", "Valdes", "password123", 1, List(barcelona, madrid).to[ListBuffer])
     val newDummy = CorporateUser(99, "piero@gmail.com", "Piero", "Valdes", "password123", 1, List(barcelona, madrid).to[ListBuffer])
 
-    val updatedUser = userRepository.update(dummy, newDummy)
+    val updatedUser = userRepository.update(dummy.id, newDummy)
 
     updatedUser shouldBe None
   }

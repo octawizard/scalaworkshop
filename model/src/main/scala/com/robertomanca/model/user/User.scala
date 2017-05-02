@@ -10,7 +10,6 @@ import scala.collection.mutable.ListBuffer
   */
 abstract class User extends PrintableUser {
   def updateUser(newUser: User): User
-
 }
 
 case class AppUser(var id: Long, var email: String, var name: String, var surname: String, var password: String, var favouriteLocations: ListBuffer[Location]) extends User {

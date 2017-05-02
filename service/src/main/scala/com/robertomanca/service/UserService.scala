@@ -1,7 +1,7 @@
 package com.robertomanca.service
 
 import com.robertomanca.model.location.Location
-import com.robertomanca.model.user.{AppUser, CorporateUser, User}
+import com.robertomanca.model.user.User
 import com.robertomanca.repository.UserRepository
 import com.robertomanca.service.exception.UserNotFoundException
 
@@ -17,7 +17,7 @@ class UserService(userRepository: UserRepository) {
   def deleteUser(userId: Long): User = userRepository.delete(userId).getOrElse(throw new UserNotFoundException("user " + userId + " doesn't exist"))
 
   def updateUser(userId: Long, user: User): User =
-    userRepository.update(getUser(userId), user).getOrElse(throw new UserNotFoundException("user " + userId + " doesn't exist"))
+    userRepository.update(userId, user).getOrElse(throw new UserNotFoundException("user " + userId + " doesn't exist"))
 
   def favouriteLocations: List[Location] = userRepository.getFavouriteLocations
 
@@ -25,9 +25,9 @@ class UserService(userRepository: UserRepository) {
 
   def favouriteLocationsByCountryAndUser(userId: Long, country: String): List[Location] = userRepository.getFavouriteLocationsByCountryAndUser(country, userId)
 
-  def getCorporateUsers: List[CorporateUser] = userRepository.getCorporateUsers.map(_.asInstanceOf[CorporateUser])
+  def getCorporateUsers: List[User] = userRepository.getCorporateUsers
 
-  def getCorporateUsersByCompany(companyId: Long): List[CorporateUser] = userRepository getCorporateUsers(companyId)
+  def getCorporateUsersByCompany(companyId: Long): List[User] = userRepository getCorporateUsers(companyId)
 
   def getAppUsers: List[User] = userRepository getAppUsers
 
