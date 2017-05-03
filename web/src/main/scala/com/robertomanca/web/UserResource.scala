@@ -74,7 +74,8 @@ object UserResource extends UsersTrait {
             parameter("userId".as[Long] ?) { // implicit GET
               optUserId =>
                 get {
-                  optUserId.map(userId => complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.favouriteLocationsByCountryAndUser(userId, country)))))
+                  optUserId.map(
+                    userId => complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.favouriteLocationsByCountryAndUser(userId, country)))))
                     .getOrElse(complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.favouriteLocationsByCountry(country)))))
                 }
             }
@@ -96,7 +97,8 @@ object UserResource extends UsersTrait {
         path("corporate") {
           parameter("companyId".as[Long] ?) { // validation handled by akka
             optCompanyId =>
-              optCompanyId.map(companyId => complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getCorporateUsersByCompany(companyId)))))
+              optCompanyId.map(
+                companyId => complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getCorporateUsersByCompany(companyId)))))
                 .getOrElse(complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getCorporateUsers))))
           }
         }
@@ -104,9 +106,4 @@ object UserResource extends UsersTrait {
     }
 
   def createRoute = concat(userRoute, userLocationsRoute, usersFilteredRoute)
-
-//  def asConcreteType(u: User) = u match {
-//    case AppUser(_, _, _, _, _, _) => u.asInstanceOf[AppUser]
-//    case CorporateUser(_, _, _, _, _, _, _) => u.asInstanceOf[CorporateUser]
-//  }
 }
