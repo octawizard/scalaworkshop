@@ -27,14 +27,7 @@ object UserResource extends UsersTrait {
       }
   }
 
-  val userRoute = concat(
-    pathPrefix("users") {
-      path("locations") {
-        get {
-          complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.favouriteLocations)))
-        }
-      }
-    },
+  val userRoute =
     pathPrefix("user") {
       concat(
         path(IntNumber) {
@@ -71,9 +64,46 @@ object UserResource extends UsersTrait {
             }
           }
         })
-    })
+    }
 
-  def createRoute = userRoute
+  val userLocationsRoute =
+    pathPrefix("locations") {
+      concat(
+        path(Segment) {
+          country =>
+            parameter("userId".as[Long] ?) { // implicit GET
+              optUserId =>
+                get {
+                  optUserId.map(userId => complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.favouriteLocationsByCountryAndUser(userId, country)))))
+                    .getOrElse(complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.favouriteLocationsByCountry(country)))))
+                }
+            }
+        },
+        pathEndOrSingleSlash {
+          get {
+            complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.favouriteLocations)))
+          }
+        }
+      )
+    }
+
+  var usersFilteredRoute =
+    pathPrefix("users") {
+      concat(
+        path("app") {
+          complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getAppUsers)))
+        },
+        path("corporate") {
+          parameter("companyId".as[Long] ?) {
+            optCompanyId =>
+              optCompanyId.map(companyId => complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getCorporateUsersByCompany(companyId)))))
+                .getOrElse(complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getCorporateUsers))))
+          }
+        }
+      )
+    }
+
+  def createRoute = concat(userRoute, userLocationsRoute, usersFilteredRoute)
 
   def asConcreteType(u: User): Any = u match {
     case AppUser(_, _, _, _, _, _) => u.asInstanceOf[AppUser]
