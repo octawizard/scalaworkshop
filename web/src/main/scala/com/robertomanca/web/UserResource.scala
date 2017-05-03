@@ -94,7 +94,7 @@ object UserResource extends UsersTrait {
           complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getAppUsers)))
         },
         path("corporate") {
-          parameter("companyId".as[Long] ?) {
+          parameter("companyId".as[Long] ?) { // validation handled by akka
             optCompanyId =>
               optCompanyId.map(companyId => complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getCorporateUsersByCompany(companyId)))))
                 .getOrElse(complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(userService.getCorporateUsers))))
