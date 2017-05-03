@@ -105,8 +105,8 @@ object UserResource extends UsersTrait {
 
   def createRoute = concat(userRoute, userLocationsRoute, usersFilteredRoute)
 
-  def asConcreteType(u: User): Any = u match {
-    case AppUser(_, _, _, _, _, _) => u.asInstanceOf[AppUser]
-    case CorporateUser(_, _, _, _, _, _, _) => u.asInstanceOf[CorporateUser]
-  }
+//  def asConcreteType(u: User) = u match {
+//    case AppUser(_, _, _, _, _, _) => u.asInstanceOf[AppUser]
+//    case CorporateUser(_, _, _, _, _, _, _) => u.asInstanceOf[CorporateUser]
+//  }
 }
