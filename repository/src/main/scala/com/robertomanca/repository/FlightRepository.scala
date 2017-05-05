@@ -22,7 +22,7 @@ class FlightRepository(val flights: ListBuffer[Flight]) {
     flight.outbound.origin.equals(origin) && flight.outbound.destination.equals(destination) &&
       flight.inbound == null && compareDay(flight.outbound.departure, departure)
 
-  def filterRoundTrip(flight: Flight, origin: Location, destination: Location, departure: Date, arrival: Date): Boolean =
+  private def filterRoundTrip(flight: Flight, origin: Location, destination: Location, departure: Date, arrival: Date): Boolean =
     flight.outbound.origin.equals(origin) && flight.outbound.destination.equals(destination) && compareDay(flight.outbound.departure, departure) &&
       flight.inbound.origin.equals(destination) && flight.inbound.destination.equals(origin) && compareDay(flight.inbound.departure, arrival)
 
