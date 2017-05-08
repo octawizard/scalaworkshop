@@ -90,9 +90,27 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--<plugin>-->
+                <!--<groupId>net.alchim31.maven</groupId>-->
+                <!--<artifactId>scala-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<compilerPlugins>-->
+                        <!--<compilerPlugin>-->
+                            <!--<groupId>com.artima.supersafe</groupId>-->
+                            <!--<artifactId>supersafe_2.12.1</artifactId>-->
+                            <!--<version>1.1.2</version>-->
+                        <!--</compilerPlugin>-->
+                    <!--</compilerPlugins>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
             <plugin>
+                <!-- see http://davidb.github.com/scala-maven-plugin -->
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
+                <version>3.2.2</version>
                 <configuration>
                     <compilerPlugins>
                         <compilerPlugin>
@@ -102,15 +120,6 @@
                         </compilerPlugin>
                     </compilerPlugins>
                 </configuration>
-                <executions>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <!-- see http://davidb.github.com/scala-maven-plugin -->
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
-                <version>3.2.2</version>
                 <executions>
                     <execution>
                         <goals>
