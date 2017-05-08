@@ -2,7 +2,7 @@ package com.robertomanca.service
 
 import java.util.Date
 
-import com.robertomanca.model.data.{FlightsTrait, LocationsTrait, UsersTrait}
+import com.robertomanca.model.data.{FlightsTrait, LocationsTrait}
 import com.robertomanca.repository.FlightRepository
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.{FlatSpec, Matchers}
