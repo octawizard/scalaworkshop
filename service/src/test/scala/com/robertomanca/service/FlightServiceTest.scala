@@ -21,4 +21,11 @@ class FlightServiceTest extends FlatSpec with Matchers with MockFactory with Fli
 
     flightService.search(rome, barcelona, new Date()) should be(List(oneWayFlight))
   }
+
+  it should "return a list of round trip flights given origin, destination and departure" in {
+
+    (flightRepository.getRoundTripFlights _) when(*, *, *, *) returns(List(rtFlight))
+
+    flightService.search(rome, barcelona, new Date(), new Date()) should be(List(rtFlight))
+  }
 }
