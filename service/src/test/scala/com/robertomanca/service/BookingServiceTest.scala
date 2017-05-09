@@ -1,5 +1,6 @@
 package com.robertomanca.service
 
+import com.robertomanca.model.booking.Booking
 import com.robertomanca.model.data.BookingsTrait
 import com.robertomanca.model.user.User
 import com.robertomanca.repository.BookingRepository
@@ -67,6 +68,24 @@ class BookingServiceTest extends FlatSpec with Matchers with MockFactory with Bo
       bookingService.changeBookingOwner(99, aUser2)
     }
     (bookingRepository.changeOwner(_: Long, _: User)).verify(99, aUser2)
+  }
+
+  it should "update the booking if exists" in {
+
+    (bookingRepository.update _) when(booking1.id, booking1) returns(Option.apply(booking1))
+
+    bookingService.updateBooking(booking1.id, booking1) should be(booking1)
+    (bookingRepository.update(_: Long, _: Booking)).verify(booking1.id, booking1)
+  }
+
+  it should "throw an exception when is asked to update the booking if it doesn't exist" in {
+
+    (bookingRepository.update _) when(99, booking1) returns(Option.empty)
+
+    a[BookingNotFoundException] should be thrownBy {
+      bookingService.updateBooking(99, booking1)
+    }
+    (bookingRepository.update(_: Long, _: Booking)).verify(99, booking1)
   }
 
 }
