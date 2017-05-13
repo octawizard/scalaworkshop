@@ -16,7 +16,7 @@ class NotificationRepositoryTest extends FlatSpec with Matchers {
     val sourceEmail = "test@gmail.com"
     val title = "This is your booking!"
 
-    val email = notificationRepository.getNotification(sourceEmail, title, body)
+    val email = notificationRepository.get(sourceEmail, title, body)
 
     email shouldBe a [Email]
     email.asInstanceOf[Email].body should be(body)
@@ -29,7 +29,7 @@ class NotificationRepositoryTest extends FlatSpec with Matchers {
     val sourceNumber = "1234566789"
     val message = "Your booking: PNR AB1234, from Rome to Barcelona."
 
-    val sms = notificationRepository.getNotification(sourceNumber, message)
+    val sms = notificationRepository.get(sourceNumber, message)
 
     sms shouldBe a [SMS]
     sms.asInstanceOf[SMS].sourceNumber should be(sourceNumber)
@@ -41,7 +41,7 @@ class NotificationRepositoryTest extends FlatSpec with Matchers {
     val userId = 1L
     val link = "http://www.yourbooking.com/QWERTY"
 
-    val push = notificationRepository.getNotification(userId, Platform.Android, link)
+    val push = notificationRepository.get(userId, Platform.Android, link)
 
     push shouldBe a [Push]
     push.asInstanceOf[Push].userId should be(userId)

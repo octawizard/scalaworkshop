@@ -8,15 +8,7 @@ import com.robertomanca.model.notification.{Email, Notification, Push, SMS}
   */
 class NotificationRepository {
 
-//  def getNotificationContent(notification: Notification): String =
-//    notification match {
-//      case SMS(_, message) => message
-//      case Email(_, title, body) => title + "\n" + body
-//      case Push(_, _, message) => message
-//      case _ => "Notification type not supported"
-//    }
-
-  def getNotification(params: Any): Notification =
+  def get(params: Any): Notification =
     params match {
       case (sourceNumber: String, message: String) => SMS(sourceNumber, message)
       case (sourceEmail: String, title: String, body: String) => Email(sourceEmail, title,body)
