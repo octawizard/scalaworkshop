@@ -5,7 +5,7 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Directives.{complete, concat, get, path}
 import akka.stream.ActorMaterializer
-import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper}
+import com.fasterxml.jackson.databind.{DeserializationFeature, SerializationFeature, ObjectMapper}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 
@@ -31,7 +31,7 @@ object WebServer {
         }
       }
 
-    val allRoutes = concat(route, UserResource.createRoute)
+    val allRoutes = concat(route, UserResource.createRoute, NotificationResource.createRoute)
 
     val bindingFuture = Http().bindAndHandle(allRoutes, "localhost", 8080)
 
@@ -50,6 +50,8 @@ object WebServer {
 object JsonUtil {
   val mapper = new ObjectMapper() with ScalaObjectMapper
   mapper registerModule DefaultScalaModule configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+  mapper configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true)
+  mapper configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true)
 
   def toJson(value: Any): String = mapper.writeValueAsString(value)
 

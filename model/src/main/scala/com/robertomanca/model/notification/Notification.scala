@@ -13,4 +13,6 @@ case class Push(userId: Long, platform: Platform, link: String) extends Notifica
 object Platform extends Enumeration {
   type Platform = Value
   val iOS, Android = Value
+
+  override def toString = s"($iOS, $Android)"
 }
