@@ -16,14 +16,13 @@ import scala.io.StdIn
   */
 object WebServer {
 
+  /* the following implicit values will be automatically provided when needed as arguments */
+  implicit val system = ActorSystem("my-system")
+  implicit val materializer = ActorMaterializer()
+  // needed for the future flatMap/onComplete in the end
+  implicit val executionContext = system.dispatcher
+
   def main(args: Array[String]) {
-
-    /* the following implicit values will be automatically provided when needed as arguments */
-    implicit val system = ActorSystem("my-system")
-    implicit val materializer = ActorMaterializer()
-    // needed for the future flatMap/onComplete in the end
-    implicit val executionContext = system.dispatcher
-
     val route =
       path("hello") {
         get {
@@ -31,7 +30,7 @@ object WebServer {
         }
       }
 
-    val allRoutes = concat(route, UserResource.createRoute, NotificationResource.createRoute)
+    val allRoutes = concat(route, UserResource.createRoute, NotificationResource.createRoute, FlightResource.createRoute)
 
     val bindingFuture = Http().bindAndHandle(allRoutes, "localhost", 8080)
 
