@@ -43,10 +43,6 @@ object NotificationResource {
     notification => JsonUtil.toJson(notification)
   }
 
-  implicit val notificationSerializer2 = Marshaller.opaque[Notification, String] {
-    notification => JsonUtil.toJson(notification)
-  }
-
   val notificationRoute = pathPrefix("notification") {
     handleExceptions(notificationNotAvailableHandler) {
       concat(

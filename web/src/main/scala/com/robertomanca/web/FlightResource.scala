@@ -20,7 +20,7 @@ object FlightResource extends FlightsTrait {
   implicit val mat = WebServer.materializer
 
   val flightRequestDeserializer = Unmarshaller.strict[HttpRequest, FlightRequest] {
-    flightRequestString => JsonUtil.fromJson[FlightRequest](Unmarshal(flightRequestString).to[String].value.get.get)
+    httpRequest => JsonUtil.fromJson[FlightRequest](Unmarshal(httpRequest).to[String].value.get.get)
   }
 
   val flightRoute =

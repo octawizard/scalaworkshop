@@ -5,9 +5,13 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Directives.{complete, concat, get, path}
 import akka.stream.ActorMaterializer
-import com.fasterxml.jackson.databind.{DeserializationFeature, SerializationFeature, ObjectMapper}
+import com.fasterxml.jackson.core.JsonParser
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer
+import com.fasterxml.jackson.databind.module.SimpleModule
+import com.fasterxml.jackson.databind._
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
+import com.robertomanca.model.user.{AppUser, CorporateUser, User}
 
 import scala.io.StdIn
 
@@ -30,7 +34,7 @@ object WebServer {
         }
       }
 
-    val allRoutes = concat(route, UserResource.createRoute, NotificationResource.createRoute, FlightResource.createRoute)
+    val allRoutes = concat(route, UserResource.createRoute, NotificationResource.createRoute, FlightResource.createRoute, BookingResource.createRoute)
 
     val bindingFuture = Http().bindAndHandle(allRoutes, "localhost", 8080)
 
@@ -47,12 +51,30 @@ object WebServer {
   * for the inspiration.
   */
 object JsonUtil {
+
+  val customModule = new SimpleModule()
+  customModule addDeserializer(classOf[User], new UserDeserializer)
+//  mapper registerModule customModule
+
   val mapper = new ObjectMapper() with ScalaObjectMapper
-  mapper registerModule DefaultScalaModule configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+  mapper registerModules(DefaultScalaModule, customModule) configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
   mapper configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true)
   mapper configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true)
 
   def toJson(value: Any): String = mapper.writeValueAsString(value)
 
   def fromJson[T](json: String)(implicit m: Manifest[T]): T = mapper.readValue[T](json)
+}
+
+class UserDeserializer extends JsonDeserializer[User] {
+
+  override def deserialize(jp: JsonParser, ctxt: DeserializationContext): User = {
+    val content = jp.getText
+    //TODO implement this
+    if (content.contains("companyId")) { // ugly
+      JsonUtil.fromJson[CorporateUser](content)
+    } else {
+      JsonUtil.fromJson[AppUser](content)
+    }
+  }
 }
