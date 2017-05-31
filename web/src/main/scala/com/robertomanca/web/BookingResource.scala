@@ -1,12 +1,11 @@
 package com.robertomanca.web
 
 import akka.http.scaladsl.model._
-import akka.http.scaladsl.unmarshalling.{Unmarshal, Unmarshaller}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.ExceptionHandler
+import akka.http.scaladsl.unmarshalling.{Unmarshal, Unmarshaller}
 import com.robertomanca.model.booking.Booking
 import com.robertomanca.model.data.BookingsTrait
-import com.robertomanca.model.user.{AppUser, CorporateUser, User}
 import com.robertomanca.repository.BookingRepository
 import com.robertomanca.service.BookingService
 import com.robertomanca.service.exception.BookingNotFoundException
