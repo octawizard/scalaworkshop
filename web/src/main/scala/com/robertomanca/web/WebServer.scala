@@ -54,7 +54,6 @@ object JsonUtil {
 
   val customModule = new SimpleModule()
   customModule addDeserializer(classOf[User], new UserDeserializer)
-//  mapper registerModule customModule
 
   val mapper = new ObjectMapper() with ScalaObjectMapper
   mapper registerModules(DefaultScalaModule, customModule) configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)

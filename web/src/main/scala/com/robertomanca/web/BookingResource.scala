@@ -36,29 +36,35 @@ object BookingResource extends BookingsTrait {
       path(LongNumber) {
         bookingId =>
           handleExceptions(bookingNotFoundHandler) {
-            get {
-              complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(bookingService.getBookingById(bookingId))))
-            }
+            concat(
+              get {
+                complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(bookingService.getBookingById(bookingId))))
+              },
+              delete {
+                complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(bookingService.deleteBooking(bookingId))))
+              },
+              put {
+                entity(as[Booking]) {
+                  booking => complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(bookingService.updateBooking(bookingId, booking))))
+                }
+              })
           }
       },
       parameter("userId".as[Long] ?) {
-        userId => concat(
-          get {
-            val uid = userId.getOrElse(-1L)
-            complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(bookingService.getBookingsByUser(uid))))
-          },
-          post {
-            entity(as[Booking]) { booking =>
-              complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(bookingService.createBooking(booking))))
-            }
-          })
+        userId =>
+          concat(
+            get {
+              val uid = userId.getOrElse(-1L)
+              complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(bookingService.getBookingsByUser(uid))))
+            },
+            post {
+              entity(as[Booking]) { booking =>
+                complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(bookingService.createBooking(booking))))
+              }
+            })
       }
     )
   }
-
-//  val createDeleteBooking = pathPrefix("booking") {
-//
-//  }
 
   def createRoute = getBookingRoute
 }
