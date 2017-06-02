@@ -11,8 +11,10 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.databind._
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
+import com.robertomanca.model.location.Location
 import com.robertomanca.model.user.{AppUser, CorporateUser, User}
 
+import scala.collection.mutable.ListBuffer
 import scala.io.StdIn
 
 /**
@@ -53,7 +55,7 @@ object WebServer {
 object JsonUtil {
 
   val customModule = new SimpleModule()
-  customModule addDeserializer(classOf[User], new UserDeserializer)
+  customModule addDeserializer(classOf[User], new UserDeserializer(classOf[User]))
 
   val mapper = new ObjectMapper() with ScalaObjectMapper
   mapper registerModules(DefaultScalaModule, customModule) configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
@@ -65,15 +67,29 @@ object JsonUtil {
   def fromJson[T](json: String)(implicit m: Manifest[T]): T = mapper.readValue[T](json)
 }
 
-class UserDeserializer extends JsonDeserializer[User] {
+class UserDeserializer(val clazz: Class[User]) extends StdDeserializer[User](clazz) {
 
   override def deserialize(jp: JsonParser, ctxt: DeserializationContext): User = {
-    val content = jp.getText
-    //TODO implement this
-    if (content.contains("companyId")) { // ugly
-      JsonUtil.fromJson[CorporateUser](content)
+
+    val codec = jp.getCodec
+    val node: JsonNode = codec readTree(jp)
+
+    val companyID = Option.apply(node.get("companyId"))
+
+    if (!companyID.isEmpty) {
+      val id = node.get("id").asLong()
+      val email = node.get("email").asText()
+      val name = node.get("name").asText()
+      val surname = node.get("surname").asText()
+      val password = node.get("password").asText()
+      return CorporateUser(id, email, name, surname, password, companyID.get.asLong, new ListBuffer[Location])
     } else {
-      JsonUtil.fromJson[AppUser](content)
+      val id = node.get("id").asLong()
+      val email = node.get("email").asText()
+      val name = node.get("name").asText()
+      val surname = node.get("surname").asText()
+      val password = node.get("password").asText()
+      return AppUser(id, email, name, surname, password, new ListBuffer[Location])
     }
   }
 }

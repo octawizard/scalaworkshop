@@ -17,9 +17,10 @@ class BookingService(bookingRepository: BookingRepository) extends BookingServic
   def getBookingById(bookingId: Long): Booking = bookingRepository.get(bookingId)
     .getOrElse(throw new BookingNotFoundException(booking_not_found format bookingId))
 
-  def createBooking(booking: Booking) = bookingRepository.create(booking)
+  def createBooking(booking: Booking): Booking = bookingRepository.create(booking)
 
-  def deleteBooking(bookingId: Long) = bookingRepository.delete(bookingId)
+  def deleteBooking(bookingId: Long): Booking = bookingRepository.delete(bookingId)
+    .getOrElse(throw new BookingNotFoundException(booking_not_found format bookingId))
 
 //  def changeBookingOwner(bookingId: Long, user: User): Booking =
 //    bookingRepository.changeOwner(bookingId, user)
@@ -37,9 +38,9 @@ trait BookingServiceTrait {
 
   def getBookingById(bookingId: Long): Booking
 
-  def createBooking(booking: Booking)
+  def createBooking(booking: Booking): Booking
 
-  def deleteBooking(bookingId: Long)
+  def deleteBooking(bookingId: Long): Booking
 
 //  def changeBookingOwner(bookingId: Long, user: User): Booking
 

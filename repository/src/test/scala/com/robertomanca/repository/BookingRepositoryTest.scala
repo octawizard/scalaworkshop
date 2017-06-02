@@ -40,7 +40,10 @@ class BookingRepositoryTest extends FlatSpec with Matchers with BeforeAndAfter w
   it should "add a new booking for a user" in {
 
     val booking = new Booking(4, aUser2, List(oneWayFlight))
-    bookingRepository.create(booking)
+    val insertedBooking = bookingRepository.create(booking)
+
+    insertedBooking.user shouldBe(aUser2)
+    insertedBooking.flights shouldBe(List(oneWayFlight))
 
     bookingRepository.getByUser(aUser2.id).size should be(1)
     bookingRepository.getByUser(aUser2.id) should contain(booking)
@@ -52,7 +55,7 @@ class BookingRepositoryTest extends FlatSpec with Matchers with BeforeAndAfter w
     bookingRepository.getByUser(booking2.user.id) should contain(booking2)
     bookingList.size should be(3)
 
-    bookingRepository.delete(booking2.id)
+    bookingRepository.delete(booking2.id) shouldBe(Option.apply(booking2))
 
     bookingRepository.getByUser(booking2.user.id) should not contain (booking2)
     bookingList.size should be(2)
@@ -62,7 +65,7 @@ class BookingRepositoryTest extends FlatSpec with Matchers with BeforeAndAfter w
 
     bookingList.size should be(3)
 
-    bookingRepository.delete(99) // doesn't exist
+    bookingRepository.delete(99) shouldBe Option.empty // doesn't exist
     bookingList.size should be(3)
   }
 
