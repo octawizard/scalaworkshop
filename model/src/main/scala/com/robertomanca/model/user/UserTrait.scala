@@ -1,4 +1,4 @@
-package com.robertomanca.model
+package com.robertomanca.model.user
 
 import com.robertomanca.model.location.Location
 

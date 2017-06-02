@@ -1,6 +1,5 @@
 package com.robertomanca.model.user
 
-import com.robertomanca.model.PrintableUser
 import com.robertomanca.model.location.Location
 
 import scala.collection.mutable.ListBuffer
