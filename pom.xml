@@ -29,6 +29,7 @@
         <module>web</module>
         <module>service</module>
         <module>repository</module>
+        <module>repository-contract</module>
     </modules>
 
     <dependencies>

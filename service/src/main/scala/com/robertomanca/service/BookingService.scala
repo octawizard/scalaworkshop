@@ -1,7 +1,6 @@
 package com.robertomanca.service
 
 import com.robertomanca.model.booking.Booking
-import com.robertomanca.model.user.User
 import com.robertomanca.repository.BookingRepository
 import com.robertomanca.service.exception.BookingNotFoundException
 

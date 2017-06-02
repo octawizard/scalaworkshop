@@ -2,6 +2,7 @@ package com.robertomanca.repository
 
 import com.robertomanca.model.booking.Booking
 import com.robertomanca.model.user.User
+import com.robertomanca.repository.contract.BookingRepositoryTrait
 
 import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
@@ -9,7 +10,7 @@ import scala.collection.mutable.ListBuffer
 /**
   * Created by roberto on 01/04/2017.
   */
-class BookingRepository(val bookings: ListBuffer[Booking]) {
+class BookingRepository(val bookings: ListBuffer[Booking]) extends BookingRepositoryTrait {
 
   val random = scala.util.Random
 

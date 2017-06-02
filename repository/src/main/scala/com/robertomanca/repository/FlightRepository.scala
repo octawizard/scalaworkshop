@@ -4,13 +4,14 @@ import java.util.{Calendar, Date}
 
 import com.robertomanca.model.flight.Flight
 import com.robertomanca.model.location.Location
+import com.robertomanca.repository.contract.FlightRepositoryTrait
 
 import scala.collection.mutable.ListBuffer
 
 /**
   * Created by Roberto Manca (roberto.manca@edreamsodigeo.com) on 31/03/2017.
   */
-class FlightRepository(val flights: ListBuffer[Flight]) {
+class FlightRepository(val flights: ListBuffer[Flight]) extends FlightRepositoryTrait{
 
   def getRoundTripFlights(origin: Location, destination: Location, departure: Date, arrival: Date): List[Flight] =
     flights.filter(filterRoundTrip(_, origin, destination, departure, arrival)).toList
