@@ -28,6 +28,7 @@
         <module>model</module>
         <module>web</module>
         <module>service</module>
+        <module>service-contract</module>
         <module>repository</module>
         <module>repository-contract</module>
     </modules>
