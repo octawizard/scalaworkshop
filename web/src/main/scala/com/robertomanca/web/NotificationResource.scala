@@ -50,7 +50,6 @@ object NotificationResource {
           parameters('sourceNumber, 'message) { (sourceNumber, message) =>
             get {
               complete(HttpEntity(ContentTypes.`application/json`, JsonUtil.toJson(notificationService.getNotification(sourceNumber, message))))
-//              complete(Marshal(notificationSerializer.apply(notificationService.getNotification(sourceNumber, message))).to[String])
             }
           }
         },
