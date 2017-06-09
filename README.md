@@ -12,13 +12,14 @@ flights, bookings, locations, notifications.
 * Scala mock 3.5.0
 * Maven 3.3.9
 
-##To build
+
+## To build
 Just type the following in the root of the project:
 ```
 mvn clean install
 ```
 
-##To Run
+## To Run
 Being in the root of the project, type:
 ```
 cd web
