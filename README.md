@@ -1,6 +1,7 @@
 # scalaworkshop
-A little exercise to experiment Scala. The application scenario is the one typical of an
-Online Travel Agency.
+A little exercise to start using Scala. The application scenario is the one typical of an
+Online Travel Agency (OTA).
+
 This project is a RESTful web service of this hypothetical OTA. The entities are users,
 flights, bookings, locations, notifications.
 
