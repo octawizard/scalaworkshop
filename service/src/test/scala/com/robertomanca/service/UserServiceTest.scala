@@ -3,8 +3,8 @@ package com.robertomanca.service
 import com.robertomanca.model.data.{LocationsTrait, UsersTrait}
 import com.robertomanca.model.location.Location
 import com.robertomanca.model.user.{AppUser, CorporateUser, User}
-import com.robertomanca.repository.UserRepository
-import com.robertomanca.service.exception.UserNotFoundException
+import com.robertomanca.repository.contract.UserRepositoryTrait
+import com.robertomanca.service.contract.exception.UserNotFoundException
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -13,7 +13,7 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 class UserServiceTest extends FlatSpec with Matchers with MockFactory with UsersTrait with LocationsTrait {
 
-  val userRepository = stub[UserRepository]
+  val userRepository = stub[UserRepositoryTrait]
   val userService = new UserService(userRepository)
 
   "A UserService" should "return a user if exists" in {

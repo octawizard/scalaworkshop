@@ -1,8 +1,8 @@
 package com.robertomanca.service
 
 import com.robertomanca.model.notification.Email
-import com.robertomanca.repository.NotificationRepository
-import com.robertomanca.service.exception.NotificationNotAvailableException
+import com.robertomanca.repository.contract.NotificationRepositoryTrait
+import com.robertomanca.service.contract.exception.NotificationNotAvailableException
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -11,7 +11,7 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 class NotificationServiceTest extends FlatSpec with Matchers with MockFactory {
 
-  val notificationRepository = stub[NotificationRepository]
+  val notificationRepository = stub[NotificationRepositoryTrait]
   val notificationService = new NotificationService(notificationRepository)
 
   "A NotificationService" should "return a notification when the provided parameters are correct" in {

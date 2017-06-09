@@ -3,7 +3,7 @@ package com.robertomanca.service
 import java.util.Date
 
 import com.robertomanca.model.data.{FlightsTrait, LocationsTrait}
-import com.robertomanca.repository.FlightRepository
+import com.robertomanca.repository.contract.FlightRepositoryTrait
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -12,7 +12,7 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 class FlightServiceTest extends FlatSpec with Matchers with MockFactory with FlightsTrait with LocationsTrait {
 
-  val flightRepository = stub[FlightRepository]
+  val flightRepository = stub[FlightRepositoryTrait]
   val flightService = new FlightService(flightRepository)
 
   "A FlightService" should "return a list of one way flights given origin, destination and departure" in {

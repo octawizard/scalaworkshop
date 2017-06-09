@@ -16,7 +16,22 @@
         </dependency>
         <dependency>
             <groupId>com.robertomanca.flights</groupId>
+            <artifactId>service-contract</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.robertomanca.flights</groupId>
             <artifactId>service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.robertomanca.flights</groupId>
+            <artifactId>repository-contract</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.robertomanca.flights</groupId>
+            <artifactId>repository</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

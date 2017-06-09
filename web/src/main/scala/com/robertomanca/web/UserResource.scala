@@ -8,7 +8,7 @@ import com.robertomanca.model.data.UsersTrait
 import com.robertomanca.model.user.{AppUser, CorporateUser, User}
 import com.robertomanca.repository.UserRepository
 import com.robertomanca.service.UserService
-import com.robertomanca.service.exception.UserNotFoundException
+import com.robertomanca.service.contract.exception.UserNotFoundException
 
 import scala.collection.mutable.ListBuffer
 

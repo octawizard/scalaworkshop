@@ -9,7 +9,7 @@ import com.robertomanca.model.notification.{Notification, Platform}
 import com.robertomanca.model.notification.Platform.Platform
 import com.robertomanca.repository.NotificationRepository
 import com.robertomanca.service.NotificationService
-import com.robertomanca.service.exception.NotificationNotAvailableException
+import com.robertomanca.service.contract.exception.NotificationNotAvailableException
 
 /**
   * Created by roberto on 15/05/2017.

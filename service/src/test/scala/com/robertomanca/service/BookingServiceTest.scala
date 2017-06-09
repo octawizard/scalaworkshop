@@ -2,9 +2,8 @@ package com.robertomanca.service
 
 import com.robertomanca.model.booking.Booking
 import com.robertomanca.model.data.BookingsTrait
-import com.robertomanca.model.user.User
-import com.robertomanca.repository.BookingRepository
-import com.robertomanca.service.exception.BookingNotFoundException
+import com.robertomanca.repository.contract.BookingRepositoryTrait
+import com.robertomanca.service.contract.exception.BookingNotFoundException
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -13,7 +12,7 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 class BookingServiceTest extends FlatSpec with Matchers with MockFactory with BookingsTrait {
 
-  val bookingRepository = stub[BookingRepository]
+  val bookingRepository = stub[BookingRepositoryTrait]
   val bookingService = new BookingService(bookingRepository)
 
   "A BookingService" should "return the list of bookings of an user" in {

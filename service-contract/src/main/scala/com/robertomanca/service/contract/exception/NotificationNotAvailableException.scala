@@ -1,4 +1,4 @@
-package com.robertomanca.service.exception
+package com.robertomanca.service.contract.exception
 
 /**
   * Created by roberto on 13/05/2017.

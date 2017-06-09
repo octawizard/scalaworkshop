@@ -8,7 +8,7 @@ import com.robertomanca.model.booking.Booking
 import com.robertomanca.model.data.BookingsTrait
 import com.robertomanca.repository.BookingRepository
 import com.robertomanca.service.BookingService
-import com.robertomanca.service.exception.BookingNotFoundException
+import com.robertomanca.service.contract.exception.BookingNotFoundException
 
 import scala.collection.mutable.ListBuffer
 
