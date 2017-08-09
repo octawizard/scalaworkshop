@@ -13,12 +13,12 @@ class UserService(userRepository: UserRepositoryTrait) extends UserServiceTrait 
 
   def createUser(user: User): User = userRepository.create(user)  // no need of return statement
 
-  def getUser(userId: Long): User = userRepository.get(userId) getOrElse (throw new UserNotFoundException("user " + userId + " doesn't exist"))
+  def getUser(userId: Long): User = userRepository.get(userId) getOrElse (throw new UserNotFoundException(s"user $userId doesn't exist"))
 
-  def deleteUser(userId: Long): User = userRepository.delete(userId).getOrElse(throw new UserNotFoundException("user " + userId + " doesn't exist"))
+  def deleteUser(userId: Long): User = userRepository.delete(userId).getOrElse(throw new UserNotFoundException(s"user $userId doesn't exist"))
 
   def updateUser(userId: Long, user: User): User =
-    userRepository.update(userId, user).getOrElse(throw new UserNotFoundException("user " + userId + " doesn't exist"))
+    userRepository.update(userId, user).getOrElse(throw new UserNotFoundException(s"user $userId doesn't exist"))
 
   def favouriteLocations: List[Location] = userRepository.getFavouriteLocations
 

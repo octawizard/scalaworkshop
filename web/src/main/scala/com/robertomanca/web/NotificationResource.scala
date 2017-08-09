@@ -34,7 +34,7 @@ object NotificationResource {
       platformString.toLowerCase match {
         case "ios" => Platform.iOS
         case "and" => Platform.Android
-        case _ => throw new IllegalArgumentException(platformString + " is not a valid platform (ios/and)")
+        case _ => throw new IllegalArgumentException(s"$platformString is not a valid platform (ios/and)")
       }
     }
   }
