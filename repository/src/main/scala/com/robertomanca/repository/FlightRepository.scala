@@ -17,7 +17,7 @@ class FlightRepository(val flights: ListBuffer[Flight]) extends FlightRepository
     flights.filter(filterRoundTrip(_, origin, destination, departure, arrival)).toList
 
   def getOneWayFlights(origin: Location, destination: Location, departure: Date): List[Flight] =
-    flights.filter(filterOneWay(_, origin, destination, departure)).toList
+    flights filter(filterOneWay(_, origin, destination, departure)) toList
 
   private def filterOneWay(flight: Flight, origin: Location, destination: Location, departure: Date): Boolean =
     flight.outbound.origin.equals(origin) && flight.outbound.destination.equals(destination) &&

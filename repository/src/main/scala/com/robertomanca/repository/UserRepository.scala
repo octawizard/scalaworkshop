@@ -17,7 +17,7 @@ class UserRepository(var users: ListBuffer[User]) extends UserRepositoryTrait {
   def getAppUsers(): List[AppUser] = users filter byAppUsers map (_.asInstanceOf[AppUser]) toList
 
   def getCorporateUsers(companyId: Long): List[CorporateUser] =
-    users filterNot byAppUsers map (_.asInstanceOf[CorporateUser]) filter (_.companyId == companyId) toList // notice infix notation
+    users filterNot byAppUsers map(_.asInstanceOf[CorporateUser]) filter (_.companyId == companyId) toList // notice infix notation
 
   def getCorporateUsers(): List[CorporateUser] = users filterNot byAppUsers map (_.asInstanceOf[CorporateUser]) toList
 

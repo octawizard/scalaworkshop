@@ -28,7 +28,7 @@ class UserService(userRepository: UserRepositoryTrait) extends UserServiceTrait 
 
   def getCorporateUsers: List[User] = userRepository.getCorporateUsers
 
-  def getCorporateUsersByCompany(companyId: Long): List[User] = userRepository getCorporateUsers(companyId)
+  def getCorporateUsersByCompany(companyId: Long): List[User] = userRepository getCorporateUsers companyId
 
   def getAppUsers: List[User] = userRepository getAppUsers
 
