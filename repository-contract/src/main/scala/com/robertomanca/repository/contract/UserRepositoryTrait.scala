@@ -8,23 +8,7 @@ import com.robertomanca.model.user.{AppUser, CorporateUser, User}
   */
 trait UserRepositoryTrait {
 
-  def getAppUsers(): List[AppUser]
-
-  def getCorporateUsers(companyId: Long): List[CorporateUser]
-
-  def getCorporateUsers(): List[CorporateUser]
-
-  def getFavouriteLocationsByCountryAndUser(country: String, userId: Long): List[Location]
-
-  def getFavouriteLocationsByCountry(country: String): List[Location]
-
-  def getFavouriteLocations(): List[Location]
-
-  def update(userId: Long, newUser: User): Option[User]
-
-  def delete(userId: Long): Option[User]
-
   def get(userId: Long): Option[User]
 
-  def create(user: User): User
+  def get(p: User => Boolean): List[User]
 }
