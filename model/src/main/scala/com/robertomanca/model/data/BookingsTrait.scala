@@ -12,4 +12,6 @@ trait BookingsTrait extends UsersTrait with FlightsTrait {
   val booking2 = new Booking(2, cUser2, List(oneWayFlight, rtFlight))
   val booking3 = new Booking(3, cUser2, List(oneWayFlight))
 
+  val booking4 = new Booking(4, cUser2, List(oneWayFlightFromRome))
+
 }

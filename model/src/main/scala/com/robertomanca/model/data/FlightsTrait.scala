@@ -14,4 +14,7 @@ trait FlightsTrait extends LocationsTrait {
 
   val oneWayFlight = new Flight(2, new FlightSegment("iberia", "iberia.jpg", barcelona, madrid, new Date(), new Date()),
     null, 80.14, Currency.getInstance("EUR"))
+
+  val oneWayFlightFromRome = new Flight(3, new FlightSegment("iberia", "iberia.jpg", rome, barcelona, new Date(), new Date()),
+    null, 80.14, Currency.getInstance("EUR"))
 }
