@@ -1,10 +1,8 @@
 package com.robertomanca.repository
 
-import com.robertomanca.model.location.Location
-import com.robertomanca.model.user.{AppUser, CorporateUser, User}
+import com.robertomanca.model.user.User
 import com.robertomanca.repository.contract.UserRepositoryTrait
 
-import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -12,4 +10,7 @@ import scala.collection.mutable.ListBuffer
   */
 class UserRepository(var users: ListBuffer[User]) extends UserRepositoryTrait {
 
+  override def get(userId: Long) = ???
+
+  override def get(p: User => Boolean) = ???
 }
