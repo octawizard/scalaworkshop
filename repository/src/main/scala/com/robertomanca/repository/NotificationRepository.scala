@@ -9,4 +9,5 @@ import com.robertomanca.repository.contract.NotificationRepositoryTrait
   */
 class NotificationRepository extends NotificationRepositoryTrait{
 
+  override def get(params: Any) = ???
 }
