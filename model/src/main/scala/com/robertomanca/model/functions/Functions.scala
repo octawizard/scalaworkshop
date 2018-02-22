@@ -42,4 +42,27 @@ object Functions extends LocationsTrait with App with BookingsTrait {
   println(bookedFlightsFromRome(barcelona)(allBookings))
   println(bookedFlightsFromRome.apply(barcelona).apply(allBookings))
 
+
+  println(new User("mike", "patton", None).loadUser("mike"))
+}
+
+class User(val name: String, val surname: String, val child: Option[User]) {
+
+  def copy(name: String = this.name, surname: String = this.surname, child: Option[User]) = new User(name, surname, child)
+
+
+  def loadUser(userName: String): Option[User] = Option(this).filter(user => user.name == userName).orElse(None)
+  val getChild = (user: User) => user.child
+//  val grandChild = loadUser("mike").flatMap(u => Option(getChild)).flatMap(u => Option(getChild)).getOrElse(None)
+//  val grandChild = loadUser("mike").flatMap(u => Option(u.child)).flatMap(u => Option(u.child))
+  val grandChild = loadUser("mike").flatMap(_.child).flatMap(_.child)
+
+
+  override def toString = s"User($name, $surname, $child)"
+}
+
+
+trait Similarity {
+  def isSimilar(x: Any): Boolean
+  def isNotSimilar(x: Any): Boolean = !isSimilar(x)
 }
